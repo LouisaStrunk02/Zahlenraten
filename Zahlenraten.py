@@ -1,19 +1,28 @@
 import random
 
 game = True
+guess = 0
+
+print("Hallo, wie heißt du?")
+name = input()
 
 while game == True:
+
     num = random.randint(1, 100)
     attempts = 0
-
-    print("Hallo, wie heißt du?")
-    name = input()
 
     print("Hallo " + name + "! Ich denke an eine Zahl zwischen 1 und 100. Welche ist es?")
 
     while True:
 
-        guess = int(input())
+        tempNumber = input()
+
+        if not tempNumber.isnumeric():
+            while not tempNumber.isnumeric():
+                print("Bitte gib nur Zahlen ein.")
+                tempNumber = input()
+        
+        guess = int(tempNumber)
 
         while guess < 1 or guess > 100:
             print("Gib bitte eine Zahl zwischen 1 und 100 an :)")
@@ -30,7 +39,7 @@ while game == True:
             attempts += 1
 
         if guess > num and guess <= 100:
-            
+
             if guess - num <= 10:
                 print("Heiß")
             else :
