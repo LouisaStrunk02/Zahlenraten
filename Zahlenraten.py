@@ -2,6 +2,7 @@ import random
 
 game = True
 guess = 0
+distance = 0
 
 print("Hallo, wie heißt du?")
 name = input()
@@ -30,20 +31,36 @@ while game == True:
 
         if guess < num and guess >= 1:
 
-            if num - guess <= 10:
+            if num - guess <= 10 and attempts == 0:
+                distance = num - guess
                 print("Heiß")
-            else :
+            elif num - guess > 10 and attempts == 0:
+                distance = num - guess
                 print("Kalt")
+            
+            if num - guess < distance and attempts > 0:
+                distance = num - guess
+                print("wärmer")
+            elif num - guess >= distance and attempts > 0:
+                distance = num - guess
+                print("kälter")
 
             print("Dein Versuch ist zu niedrig. Rate erneut!")
             attempts += 1
 
         if guess > num and guess <= 100:
 
-            if guess - num <= 10:
+            if guess - num <= 10 and attempts == 0:
                 print("Heiß")
-            else :
+            elif guess - num > 10 and attempts == 0:
                 print("Kalt")
+
+            if guess - num < distance and attempts > 0:
+                distance = num - guess
+                print("wärmer")
+            elif guess - num >= distance and attempts > 0:
+                distance = num - guess
+                print("kälter")
 
             print("Dein Versuch ist zu hoch. Rate erneut!")
             attempts += 1
