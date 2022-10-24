@@ -1,71 +1,74 @@
 import random
 
-game = True
-guess = 0
-distance = 0
+MIN_NUMBER = 1
+MAX_NUMBER = 100
+new_game = True
+distance_from_number = 0
 
 print("Hallo, wie heißt du?")
 name = input()
 
-while game == True:
+while new_game == True:
 
-    num = random.randint(1, 100)
+    number_to_guess = random.randint(MIN_NUMBER, MAX_NUMBER)
     attempts = 0
 
-    print("Hallo " + name + "! Ich denke an eine Zahl zwischen 1 und 100. Welche ist es?")
+    print("Hallo " + name + "! Ich denke an eine Zahl zwischen " + str(MIN_NUMBER) + " und " + str(MAX_NUMBER) + ". Welche ist es?")
 
     while True:
 
-        tempNumber = input()
+        current_guess = input()
 
-        if not tempNumber.isnumeric():
-            while not tempNumber.isnumeric():
+        if not current_guess.isnumeric():
+            while not current_guess.isnumeric():
                 print("Bitte gib nur Zahlen ein.")
-                tempNumber = input()
+                current_guess = input()
         
-        guess = int(tempNumber)
+        guess = int(current_guess)
 
-        while guess < 1 or guess > 100:
-            print("Gib bitte eine Zahl zwischen 1 und 100 an :)")
+        while guess < MIN_NUMBER or guess > MAX_NUMBER:
+            print("Gib bitte eine Zahl zwischen " + str(MIN_NUMBER) + " und " + str(MAX_NUMBER) + " an :)")
             break
 
-        if guess < num and guess >= 1:
+        if guess < number_to_guess and guess >= MIN_NUMBER:
 
-            if num - guess <= 10 and attempts == 0:
-                distance = num - guess
+            if number_to_guess - guess <= 10 and attempts == 0:
+                distance_from_number = number_to_guess - guess
                 print("Heiß")
-            elif num - guess > 10 and attempts == 0:
-                distance = num - guess
+            elif number_to_guess - guess > 10 and attempts == 0:
+                distance_from_number = number_to_guess - guess
                 print("Kalt")
             
-            if num - guess < distance and attempts > 0:
-                distance = num - guess
+            if number_to_guess - guess < distance_from_number and attempts > 0:
+                distance_from_number = number_to_guess - guess
                 print("wärmer")
-            elif num - guess >= distance and attempts > 0:
-                distance = num - guess
+            elif number_to_guess - guess >= distance_from_number and attempts > 0:
+                distance_from_number = number_to_guess - guess
                 print("kälter")
 
             print("Dein Versuch ist zu niedrig. Rate erneut!")
             attempts += 1
 
-        if guess > num and guess <= 100:
+        if guess > number_to_guess and guess <= MAX_NUMBER:
 
-            if guess - num <= 10 and attempts == 0:
+            if guess - number_to_guess <= 10 and attempts == 0:
+                distance_from_number = guess - number_to_guess
                 print("Heiß")
-            elif guess - num > 10 and attempts == 0:
+            elif guess - number_to_guess > 10 and attempts == 0:
+                distance_from_number = guess - number_to_guess
                 print("Kalt")
 
-            if guess - num < distance and attempts > 0:
-                distance = num - guess
+            if guess - number_to_guess < distance_from_number and attempts > 0:
+                distance_from_number = guess - number_to_guess
                 print("wärmer")
-            elif guess - num >= distance and attempts > 0:
-                distance = num - guess
+            elif guess - number_to_guess >= distance_from_number and attempts > 0:
+                distance_from_number = guess - number_to_guess
                 print("kälter")
 
             print("Dein Versuch ist zu hoch. Rate erneut!")
             attempts += 1
 
-        if guess == num:
+        if guess == number_to_guess:
             print("Gut gemacht! Du hast die richtige Zahl nach nur " + str(attempts) + " Versuchen erraten")
             print("Möchtest du noch einmal spielen? y/n")
             again = input()
@@ -73,10 +76,10 @@ while game == True:
 
             while True:
                 if again == "y":
-                    game = True
+                    new_game = True
                     break
                 elif again == "n":
-                    game = False
+                    new_game = False
                     break
                 else:
                     print("Bitte gib y für ja und n für nein ein")
